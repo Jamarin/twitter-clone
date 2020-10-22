@@ -31,7 +31,8 @@ export default {
           this.$store.dispatch('user/login', {
             username: response.data.username,
             email: response.data.email,
-            role: response.data.role
+            role: response.data.role,
+            id: response.data.id
           })
           this.$router.push('/')
         } else {
@@ -42,20 +43,6 @@ export default {
         console.error(err)
         this.$buefy.notification.open({message: "Error, user cannot login", type: 'is-danger'})
       });
-
-      // let tryLoginUser = this.users.filter(user => (user.email === this.email && user.password === this.password));
-      // if(tryLoginUser.length > 0 && tryLoginUser[0] !== undefined) {
-      //   this.$store.dispatch('user/login', {
-      //     username: tryLoginUser.username,
-      //     email: tryLoginUser.email,
-      //     role: tryLoginUser.role
-      //   })
-      //   this.$router.push('/');
-      // } else {
-      //   this.$buefy.notification.open({message: "Error, user cannot login", type: 'is-danger'})
-      // }
-
-
     }
   }
 }

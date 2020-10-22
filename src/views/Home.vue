@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="Home">
     <div class="tile is-ancestor">
       <div class="tile is-parent is-3">
         <div class="tile is-child">
@@ -7,7 +7,8 @@
           <h3>Welcome {{ $store.getters["user/getUsername"] }}</h3>
         </div>
       </div>
-      <div class="tile is-parent">
+      <div class="tile is-parent is-vertical">
+        <NewTweet class="tile is-child"/>
         <TweetList class="tile is-child"/>
       </div>
       <div class="tile is-parent is-3">
@@ -21,10 +22,11 @@
 
 <script>
 import TweetList from "@/components/TweetList";
+import NewTweet from "@/components/NewTweet";
 
 export default {
   name: "Home",
-  components: {TweetList},
+  components: {NewTweet, TweetList},
   methods: {
     logout: function () {
       this.$store.dispatch("user/logout")
@@ -35,5 +37,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .Home {
+    margin-top: 1rem;
+  }
 </style>

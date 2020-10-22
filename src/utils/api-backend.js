@@ -16,16 +16,17 @@ let firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const API_DEBUG = 'http://localhost:5001/jeddit-1123/us-central1'
-const API = (process.env.NODE_ENV === 'production') ? 'https://us-central1-jeddit-1123.cloudfunctions.net' : API_DEBUG
+const API_PROD = 'https://us-central1-jeddit-1123.cloudfunctions.net'
+const API = (process.env.NODE_ENV === 'production') ? API_PROD : API_DEBUG
 
 const AXIOS = axios.create({
     baseURL: API,
 });
 
 AXIOS.defaults.headers.common = {
-    "Content-Type": "application/json"
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
 }
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export default {
     loginUser(email, password) {
@@ -34,6 +35,15 @@ export default {
             password
 
         });
+    },
+    createTweet(tweetData) {
+        return AXIOS.post('/createTweet', {
+            text: tweetData.text,
+            author: tweetData.author
+        })
+    },
+    listAllTweetsByUser() {
+        return AXIOS.get('/listTweetsByUser')
     },
     registerUser(userData) {
         return AXIOS.post('/registerUser', {

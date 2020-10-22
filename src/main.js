@@ -9,6 +9,10 @@ import {router} from '@/router'
 
 import store from '@/store'
 
+import Moment from 'moment'
+Moment.locale('es')
+Vue.prototype.$moment = Moment
+
 Vue.use(Buefy)
 Vue.use(VueRouter)
 

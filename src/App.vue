@@ -12,4 +12,7 @@ export default {
 </script>
 
 <style>
+  .container {
+    margin-top: 2rem;
+  }
 </style>
