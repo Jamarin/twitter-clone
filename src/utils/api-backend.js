@@ -3,12 +3,14 @@ import "firebase/firestore";
 import "firebase/auth";
 import axios from "axios";
 
+let firebaseApiKey = process.env.FIREBASE_PROJECT_NAME
+
 let firebaseConfig = {
-    apiKey: "AIzaSyA9S3nQmXSpvkYANH7kprN-T6K6qa-21DM",
-    authDomain: "jeddit-1123.firebaseapp.com",
-    databaseURL: "https://jeddit-1123.firebaseio.com",
-    projectId: "jeddit-1123",
-    storageBucket: "jeddit-1123.appspot.com",
+    apiKey: firebaseApiKey,
+    authDomain: firebaseApiKey+".firebaseapp.com",
+    databaseURL: "https://"+ firebaseApiKey +".firebaseio.com",
+    projectId: firebaseApiKey,
+    storageBucket: firebaseApiKey+".appspot.com",
     messagingSenderId: "731081875199",
     appId: "1:731081875199:web:9a68d6d39e4d0d39a2f6ca"
 };
