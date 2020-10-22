@@ -1,5 +1,12 @@
 # twitter-clone
 
+## To-do
+- User can follow
+- User can be followed
+- User only see followed users tweets
+- View profile with tweets
+- Retweet functionality
+
 ## Project setup
 ```
 yarn install
