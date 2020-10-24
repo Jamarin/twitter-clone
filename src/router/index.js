@@ -4,14 +4,16 @@ import Login from "@/views/Login";
 import Register from "@/views/Register";
 
 import store from '@/store'
+import Profile from "@/views/Profile";
 
 const router = new VueRouter({
     mode: 'history',
     base: __dirname,
     routes: [
-        {path: '/', component: Home, meta: {requiresAuth: true, requiresAnon: false }},
-        {path: '/login', component: Login, meta: {requiresAuth: false, requiresAnon: true }},
-        {path: '/register', component: Register, meta: {requiresAuth: false, requiresAnon: true }},
+        {path: '/', name: 'home', component: Home, meta: {requiresAuth: true, requiresAnon: false }},
+        {path: '/profile/:username', name: 'profile', component: Profile, meta: {requiresAuth: true, requiresAnon: false }},
+        {path: '/login', name: 'login', component: Login, meta: {requiresAuth: false, requiresAnon: true }},
+        {path: '/register', name: 'register', component: Register, meta: {requiresAuth: false, requiresAnon: true }},
     ]
 });
 

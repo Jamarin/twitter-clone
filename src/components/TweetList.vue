@@ -19,8 +19,9 @@ import api from '@/utils/api-backend'
 export default {
   name: "TweetList",
   components: {Tweet},
+  props: ["username"],
   created() {
-    this.loadData();
+    this.loadData(this.username)
 
     // setInterval(function () {
     //   this.loadData();
@@ -32,8 +33,9 @@ export default {
     }
   },
   methods: {
-    loadData: function () {
-      api.listAllTweetsByUser()
+    loadData: function (username) {
+      let tweetsPromise = (username !== undefined) ? api.listAllTweetsByUser(username) : api.listAllTweets()
+      tweetsPromise
           .then(res => {
             this.tweets = res.data.sort((a, b) => {
               return b.created_at - a.created_at

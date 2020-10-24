@@ -3,14 +3,15 @@ import "firebase/firestore";
 import "firebase/auth";
 import axios from "axios";
 
-let firebaseApiKey = process.env.FIREBASE_PROJECT_NAME
+let firebaseApiKey = process.env.FIREBASE_API_KEY
+let firebaseProjectName = process.env.FIREBASE_PROJECT_NAME
 
 let firebaseConfig = {
     apiKey: firebaseApiKey,
-    authDomain: firebaseApiKey+".firebaseapp.com",
-    databaseURL: "https://"+ firebaseApiKey +".firebaseio.com",
-    projectId: firebaseApiKey,
-    storageBucket: firebaseApiKey+".appspot.com",
+    authDomain: firebaseProjectName+".firebaseapp.com",
+    databaseURL: "https://"+ firebaseProjectName +".firebaseio.com",
+    projectId: firebaseProjectName,
+    storageBucket: firebaseProjectName+".appspot.com",
     messagingSenderId: "731081875199",
     appId: "1:731081875199:web:9a68d6d39e4d0d39a2f6ca"
 };
@@ -44,8 +45,15 @@ export default {
             author: tweetData.author
         })
     },
-    listAllTweetsByUser() {
-        return AXIOS.get('/listTweetsByUser')
+    listAllTweetsByUser(username) {
+        return AXIOS.get('/listTweetsByUser', {
+            params: {
+                username
+            }
+        })
+    },
+    listAllTweets() {
+        return AXIOS.get('/listTweets')
     },
     registerUser(userData) {
         return AXIOS.post('/registerUser', {
