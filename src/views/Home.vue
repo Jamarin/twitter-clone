@@ -20,7 +20,7 @@
         </div>
         <div class="tile is-parent is-3">
           <div class="tile is-child">
-            <button @click="logout">Logout</button>
+            Sidebar
           </div>
         </div>
       </div>

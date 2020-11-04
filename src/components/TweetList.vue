@@ -22,10 +22,12 @@ export default {
   props: ["username"],
   created() {
     this.loadData(this.username)
-
     // setInterval(function () {
     //   this.loadData();
     // }.bind(this), 10000);
+  },
+  mounted() {
+    if(this.tweets.length > 0) this.$emit('loadedData', true)
   },
   data() {
     return {

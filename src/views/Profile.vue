@@ -13,11 +13,15 @@
           </h3>
         </div>
       </div>
-      <div class="tile is-parent is-8">
+      <div class="tile is-parent is-8" v-if="isThereAnyTweet">
         <TweetList
             class="tile is-child"
             :username="$route.params.username"
+            @loadedData="checkIfThereIsAnyTweet"
         />
+      </div>
+      <div class="tile is-parent is-8" v-else>
+        No tweets
       </div>
       <div class="tile is-parent is-2">
         <p>asdasd</p>
@@ -32,7 +36,18 @@ import TheHeader from "@/components/TheHeader";
 
 export default {
   name: "Profile",
-  components: {TheHeader, TweetList}
+  data() {
+    return {
+      isThereAnyTweet: false,
+    }
+  },
+  components: {TheHeader, TweetList},
+  methods: {
+    checkIfThereIsAnyTweet: (isThereAnyTweet) => {
+      console.log(`Is there any tweet? ${isThereAnyTweet}`)
+      this.isThereAnyTweet = isThereAnyTweet
+    }
+  }
 }
 </script>
 
