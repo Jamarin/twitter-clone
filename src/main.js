@@ -15,8 +15,15 @@ Vue.prototype.$moment = Moment
 
 Vue.use(Buefy)
 Vue.use(VueRouter)
-
+window.event = new Vue;
 Vue.config.productionTip = false
+
+// Socket.IO
+// import VueSocketIO from 'vue-socket.io'
+// Vue.use(new VueSocketIO({
+//     debug: true,
+//     connection: 'http://127.0.0.1:3000',
+// }))
 
 new Vue({
     render: h => h(App),

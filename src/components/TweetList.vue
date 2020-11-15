@@ -22,15 +22,23 @@ export default {
   props: ["username"],
   created() {
     this.loadData(this.username)
+    window.event.$on('reloadTweets', function () {
+      this.loadData(this.username)
+    }.bind(this));
     // setInterval(function () {
     //   this.loadData();
     // }.bind(this), 10000);
   },
   data() {
     return {
-      tweets: []
+      tweets: [],
     }
   },
+  // sockets : {
+  //   connect: function(){
+  //     console.log('socket connected');
+  //   },
+  // },
   methods: {
     loadData: async function (username) {
       try {

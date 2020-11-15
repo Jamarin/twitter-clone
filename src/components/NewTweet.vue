@@ -27,25 +27,15 @@ export default {
       }
 
       try {
-        let response = await localApi.createTweet({
+        await localApi.createTweet({
           text: this.tweetText,
           author: this.$store.getters["user/getId"]
         })
         this.tweetText = ''
-        console.info(response)
+        window.event.$emit('reloadTweets');
       } catch (err) {
         console.error(err)
       }
-      // try {
-      //   let response = await api.createTweet({
-      //     text: this.tweetText,
-      //     author: this.$store.getters["user/getId"]
-      //   })
-      //   this.tweetText = ''
-      //   this.$buefy.notification.open({message: response.data, type: 'is-info'})
-      // } catch (err) {
-      //   console.error(err)
-      // }
     }
   }
 }
