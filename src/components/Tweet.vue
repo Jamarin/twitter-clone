@@ -1,7 +1,7 @@
 <template>
   <div class="tweet">
     <div class="author">
-      <h2 class="author-name">{{ username }}</h2>
+      <h2 class="author-name"><router-link :to="{ name: 'profile', params: { username: username }}">{{ username }}</router-link></h2>
       <b-image
           :src="image"
           :alt="username + 'avatar'"
@@ -29,10 +29,10 @@ export default {
   props: ["username", "text", "created_at", "image"],
   methods: {
     fromNow: function (date) {
-      return this.$moment.unix(date).fromNow()
+      return this.$moment(date).fromNow()
     },
     toDate: function (date) {
-      return this.$moment.unix(date).format("DD-MM-YYYY HH:mm")
+      return this.$moment(date).format("DD-MM-YYYY HH:mm:ss")
     }
   }
 }

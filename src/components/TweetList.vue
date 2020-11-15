@@ -14,7 +14,7 @@
 
 <script>
 import Tweet from "@/components/Tweet";
-import api from '@/utils/api-backend'
+import localApi from '@/utils/local-backend'
 
 export default {
   name: "TweetList",
@@ -26,24 +26,25 @@ export default {
     //   this.loadData();
     // }.bind(this), 10000);
   },
-  mounted() {
-    if(this.tweets.length > 0) this.$emit('loadedData', true)
-  },
   data() {
     return {
       tweets: []
     }
   },
   methods: {
-    loadData: function (username) {
-      let tweetsPromise = (username !== undefined) ? api.listAllTweetsByUser(username) : api.listAllTweets()
-      tweetsPromise
-          .then(res => {
-            this.tweets = res.data.sort((a, b) => {
-              return b.created_at - a.created_at
-            })
-          })
-          .catch(err => console.error(err))
+    loadData: async function (username) {
+      try {
+        let response = (username === undefined) ? await localApi.getAllTweets() : await localApi.getTweetsByUser(username)
+        this.tweets = response.data.sort((a, b) => {
+          let dateA = this.$moment(a.created_at).unix()
+          let dateB = this.$moment(b.created_at).unix()
+          return dateB - dateA
+        })
+      } catch (err) {
+        console.error(err)
+      }
+      if (this.tweets.length > 0) this.$emit('loadedData', true)
+      else this.$emit('loadedData', false)
     }
   }
 }

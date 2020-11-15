@@ -52,6 +52,13 @@ export default {
             }
         })
     },
+    listAllTweetsByListOfUsers(listOfUsers) {
+        return AXIOS.get(`/listTweetsByFollowers`, {
+            params: {
+                listOfUsers: listOfUsers
+            }
+        })
+    },
     listAllTweets() {
         return AXIOS.get('/listTweets')
     },

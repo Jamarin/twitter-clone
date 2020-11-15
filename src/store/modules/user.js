@@ -4,7 +4,8 @@ const state = () => ({
     role: '',
     id: '',
     image: '',
-    isAuth: false
+    isAuth: false,
+    token: ''
 })
 
 const getters = {
@@ -20,6 +21,9 @@ const getters = {
     getAvatar: (state) => {
         return state.image
     },
+    getToken: (state) => {
+        return state.token
+    }
 }
 
 const actions = {
@@ -41,6 +45,7 @@ const mutations = {
             state.isAuth = true
             state.id = userData.id
             state.image = userData.image
+            state.token = userData.token
         } else {
             state.username = ''
             state.email = ''
@@ -48,6 +53,7 @@ const mutations = {
             state.isAuth = false
             state.id = ''
             state.image = ''
+            state.token = ''
         }
     }
 }

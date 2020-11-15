@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import api from '@/utils/api-backend'
+// import api from '@/utils/api-backend'
+import localApi from '@/utils/local-backend'
 
 export default {
   name: "NewTweet",
@@ -19,23 +20,32 @@ export default {
     }
   },
   methods: {
-    tweet: function () {
+    tweet: async function () {
       if (!this.tweetText.length > 0) {
         this.$refs.input.$el.childNodes[0].focus()
         return;
       }
-      api.createTweet({
-        text: this.tweetText,
-        author: this.$store.getters["user/getId"]
-      })
-          .then(result => {
-            this.tweetText = ''
-            this.$buefy.notification.open({message: result.data, type: 'is-info'})
-          })
-          .catch(err => {
-            console.error(err)
-          })
-      console.log(this.tweetText)
+
+      try {
+        let response = await localApi.createTweet({
+          text: this.tweetText,
+          author: this.$store.getters["user/getId"]
+        })
+        this.tweetText = ''
+        console.info(response)
+      } catch (err) {
+        console.error(err)
+      }
+      // try {
+      //   let response = await api.createTweet({
+      //     text: this.tweetText,
+      //     author: this.$store.getters["user/getId"]
+      //   })
+      //   this.tweetText = ''
+      //   this.$buefy.notification.open({message: response.data, type: 'is-info'})
+      // } catch (err) {
+      //   console.error(err)
+      // }
     }
   }
 }

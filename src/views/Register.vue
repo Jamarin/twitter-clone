@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import api from '@/utils/api-backend'
+// import api from '@/utils/api-backend'
+import localApi from '@/utils/local-backend'
 
 export default {
   name: "Register",
@@ -62,15 +63,27 @@ export default {
 
       return valid;
     },
-    register: function () {
+    register: async function () {
       this.errors = []
       if(this.validateForm()) {
-        api.registerUser(this.userData)
-            .then(registeredUser => {
-              console.log(registeredUser)
-            }).catch(err => {
+        try {
+          let response = await localApi.registerUser(this.userData)
+          console.log(response)
+          if(response.status === 200) {
+            this.$buefy.notification.open({"message": "Successfully registered user", "type": "is-success"})
+          } else {
+            this.$buefy.notification.open({"message": "Unsuccessfully registered user", "type": "is-warning"})
+          }
+          await this.$router.push('/')
+        } catch(err) {
           console.error(err)
-        })
+        }
+        // api.registerUser(this.userData)
+        //     .then(registeredUser => {
+        //       console.log(registeredUser)
+        //     }).catch(err => {
+        //   console.error(err)
+        // })
       }
     }
   }
