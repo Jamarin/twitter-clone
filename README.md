@@ -1,10 +1,15 @@
 # twitter-clone
 
+## Features
+- User can register
+- User can login/logout
+- User can post tweets
+- View profile with tweets
+
 ## To-do
 - User can follow
 - User can be followed
 - User only see followed users tweets
-- View profile with tweets
 - Retweet functionality
 
 ## Project setup
