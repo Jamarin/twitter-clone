@@ -5,7 +5,9 @@ const state = () => ({
     id: '',
     image: '',
     isAuth: false,
-    token: ''
+    token: '',
+    following: [],
+    follower: []
 })
 
 const getters = {
@@ -23,6 +25,12 @@ const getters = {
     },
     getToken: (state) => {
         return state.token
+    },
+    getFollowing: (state) => {
+        return state.following
+    },
+    getFollower: (state) => {
+        return state.follower
     }
 }
 
@@ -46,6 +54,8 @@ const mutations = {
             state.id = userData.id
             state.image = userData.image
             state.token = userData.token
+            state.following = userData.following
+            state.follower = userData.follower
         } else {
             state.username = ''
             state.email = ''
@@ -54,7 +64,15 @@ const mutations = {
             state.id = ''
             state.image = ''
             state.token = ''
+            state.following = []
+            state.follower = []
         }
+    },
+    setFollowing(state, following) {
+        state.following = following
+    },
+    setFollower(state, follower) {
+        state.follower = follower
     }
 }
 

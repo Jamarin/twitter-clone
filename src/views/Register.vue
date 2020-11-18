@@ -68,7 +68,6 @@ export default {
       if(this.validateForm()) {
         try {
           let response = await localApi.registerUser(this.userData)
-          console.log(response)
           if(response.status === 200) {
             this.$buefy.notification.open({"message": "Successfully registered user", "type": "is-success"})
           } else {

@@ -43,5 +43,17 @@ export default {
     },
     getUserDataByUsername(username) {
         return AXIOS.get(`/user/username/${username}`)
+    },
+    execFollow(followedId) {
+        return AXIOS.put('/user/follow/', {
+            userFollowing: store.getters["user/getId"],
+            userFollowed: followedId
+        })
+    },
+    execUnfollow(unfollowedId) {
+        return AXIOS.put('/user/unfollow/', {
+            userUnfollowing: store.getters["user/getId"],
+            userUnfollowed: unfollowedId
+        })
     }
 }
